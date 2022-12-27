@@ -15,12 +15,14 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class UserRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> route(UserHandler userHandler){
+    public RouterFunction<ServerResponse> userRoute(UserHandler userHandler){
         return RouterFunctions.route()
-                .path("/users",
-                        b1 -> b1.nest(accept(MediaType.APPLICATION_JSON) ,
-                                b2 -> b2.GET("/all",userHandler::findAll)))
+                .path("/users", b -> b
+                .GET("/all", accept(MediaType.APPLICATION_JSON),userHandler::findAll)
+                .GET("/byUsername", accept(MediaType.APPLICATION_JSON),userHandler::findByUsername))
                 .build();
 
     }
 }
+
+

@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 public class AuthServiceApplication {
 
     public static void main(String[] args) {
-
         ConfigurableApplicationContext context = SpringApplication.run(AuthServiceApplication.class, args);
     }
 

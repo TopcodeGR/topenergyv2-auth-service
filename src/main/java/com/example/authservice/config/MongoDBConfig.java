@@ -36,6 +36,6 @@ public class MongoDBConfig extends AbstractReactiveMongoConfiguration {
 
     @Bean
     public ReactiveMongoTemplate reactiveMongoTemplate() {
-        return new ReactiveMongoTemplate(reactiveMongoClient(), getDatabaseName());
+        return new ReactiveMongoTemplate(reactiveMongoClient(), this.dbName);
     }
 }

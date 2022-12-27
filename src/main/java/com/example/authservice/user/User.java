@@ -126,6 +126,13 @@ public class User {
         this.accessTokens = accessTokens;
     }
 
+    public void updateOrInsertAccessToken(UserAccessToken accessToken, String clientId){
+        this.accessTokens.put(clientId,accessToken);
+    }
+
+    public void updateOrInsertRefreshToken(UserRefreshToken refreshToken, String clientId){
+        this.refreshTokens.put(clientId,refreshToken);
+    }
     public Map<String, UserRefreshToken> getRefreshTokens() {
         return refreshTokens;
     }
