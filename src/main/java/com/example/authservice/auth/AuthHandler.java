@@ -1,18 +1,15 @@
 package com.example.authservice.auth;
 
 
-import com.example.authservice.client.ClientHeaders;
+
 import com.example.authservice.client.ClientService;
 import com.example.authservice.user.IUserRepository;
 import com.example.authservice.user.User;
 import com.example.authservice.user.UserService;
-import com.example.authservice.user.UserTokens;
 import com.example.authservice.utils.APIResponse;
-import com.mongodb.client.result.UpdateResult;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-import org.springframework.data.mongodb.core.query.*;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -20,7 +17,6 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 @Component
 public class AuthHandler {
 
@@ -58,7 +54,6 @@ public class AuthHandler {
                                 if(!isPasswordValid){
                                     return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"Your password is invalid.").getAsMap()));
                                 }
-
 
                                 return authService.updateUserTokens(u,clientId).flatMap(r->{
                                     return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
