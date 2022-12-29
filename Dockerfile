@@ -1,9 +1,4 @@
 FROM openjdk:17-jdk-slim
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-COPY mvnw.cmd ./
-RUN sudo chmod +x mvnw
-RUN sudo ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
 RUN mkdir -p target/dependency
 RUN cd target/dependency
 RUN jar -xf ../*.jar
