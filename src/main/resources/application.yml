@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT}
+  port: 5000
 db-connection-string: ${DB_CONNECTION_STRING}
 db-name: ${DB_NAME}
 auth:
