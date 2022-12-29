@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Maven
-        uses: ./mvnw package && java -jar target/topeneryv2-auth-service-dev.jar
+        run: ./mvnw package && java -jar target/topeneryv2-auth-service-dev.jar
 
       - name: Build the image
         run: docker build  --no-cache -t topalson/topenergyv2-auth-service:dev .
