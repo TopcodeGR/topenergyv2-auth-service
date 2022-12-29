@@ -1,4 +1,7 @@
 FROM openjdk:17-jdk-slim
+RUN mkdir -p build/dependency
+RUN cd build/dependency
+RUN jar -xf ../libs/*.jar
 ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
