@@ -1,4 +1,5 @@
 FROM openjdk:17-jdk-slim
+RUN java -jar target/topeneryv2-auth-service-dev.jar
 RUN mkdir -p target/dependency
 RUN cd target/dependency
 RUN jar -xf ../*.jar
