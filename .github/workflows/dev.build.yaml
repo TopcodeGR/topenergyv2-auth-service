@@ -6,7 +6,7 @@ on:
 jobs:
   build-dev:
     runs-on: ubuntu-20.04
-    name: Build TopenergyV1 for dev
+    name: Build topenergyv2-auth-service for dev
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
