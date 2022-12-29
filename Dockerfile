@@ -1,11 +1,9 @@
 FROM openjdk:17-jdk-slim
-RUN addgroup --system spring && adduser --system spring --ingroup spring
-USER spring:spring
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY mvnw.cmd ./
-RUN chmod +x mvnw
-RUN ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+RUN sudo chmod +x mvnw
+RUN sudo ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
 RUN mkdir -p target/dependency
 RUN cd target/dependency
 RUN jar -xf ../*.jar
