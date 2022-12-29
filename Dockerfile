@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-slim
-RUN addgroup -S spring && adduser -S spring -G spring
+RUN addgroup --system spring && adduser --system spring --group spring
 USER spring:spring
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
