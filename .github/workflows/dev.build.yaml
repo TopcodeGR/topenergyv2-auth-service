@@ -1,0 +1,24 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+jobs:
+  build-dev:
+    runs-on: ubuntu-20.04
+    name: Build TopenergyV1 for dev
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Build the image
+        run: docker build  --no-cache -t topalson/topenergyv2-auth-service:dev .
+
+      - name: Docker login
+        run: echo $PASSWORD | docker login --username $USERNAME --password-stdin
+        env:
+          USERNAME: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
+          PASSWORD: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+      - name: Push the image
+        run: docker push topalson/topenergyv2-auth-service:dev
