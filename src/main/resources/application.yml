@@ -1,0 +1,6 @@
+server:
+  port: ${SERVER_PORT}
+db-connection-string: ${DB_CONNECTION_STRING}
+db-name: ${DB_NAME}
+auth:
+  jwt-secret: ${AUTH_JTW_SECRET}
