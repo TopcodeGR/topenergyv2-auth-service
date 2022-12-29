@@ -11,9 +11,6 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v2
 
-      - name: Maven
-        run: ./mvnw package
-
       - name: Build the image
         run: docker build  --no-cache -t topalson/topenergyv2-auth-service:dev .
 
