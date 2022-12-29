@@ -4,6 +4,7 @@ USER spring:spring
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY mvnw.cmd ./
+RUN chmod +x mvnw
 RUN ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
 RUN mkdir -p target/dependency
 RUN cd target/dependency
