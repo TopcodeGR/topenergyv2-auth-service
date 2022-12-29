@@ -18,7 +18,6 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-COPY settings-docker.xml /usr/share/maven/ref/
 RUN ./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
 RUN mkdir -p target/dependency
 RUN cd target/dependency
