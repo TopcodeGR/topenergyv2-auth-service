@@ -24,6 +24,9 @@ public class MongoDBConfig extends AbstractReactiveMongoConfiguration {
     @Override
     public MongoClient reactiveMongoClient() {
 
+        System.out.println(dbConnectionString);
+        System.out.println(dbName);
+
         final ConnectionString connectionString = new ConnectionString(this.dbConnectionString);
         final MongoClientSettings mongoClientSettings = MongoClientSettings.builder().applyConnectionString(connectionString).build();
         return MongoClients.create(mongoClientSettings);
