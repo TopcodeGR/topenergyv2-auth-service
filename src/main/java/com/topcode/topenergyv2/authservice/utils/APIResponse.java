@@ -14,6 +14,9 @@ public  class APIResponse<T> {
         this.message = message;
     }
 
+    public APIResponse() {
+    }
+
 
     public Map<String,Object> getAsMap(){
         Map<String,Object> map = new HashMap<>();
@@ -21,5 +24,9 @@ public  class APIResponse<T> {
         map.put("success",this.success);
         map.put("message",this.message);
         return map;
+    }
+
+    public T getData() {
+        return data;
     }
 }

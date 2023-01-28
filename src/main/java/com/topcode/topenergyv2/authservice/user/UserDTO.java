@@ -4,16 +4,27 @@ public class UserDTO {
 
 
     private String _id;
-    private String name;
+    private String firstName;
+
+    private String lastName;
+    private String bussinessSector;
+    private String bussinessName;
     private String username;
     private String phone;
-    private String address;
+    private String email;
+    private UserAddress address;
     private String VAT;
+    private String DOI;
+
     private String logo;
     private Boolean active;
+    private String stripeCustomerId;
+
+    private String elorusCustomerId;
 
     public UserDTO() {
     }
+
 
     public String get_id() {
         return _id;
@@ -23,12 +34,28 @@ public class UserDTO {
         this._id = _id;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getBussinessSector() {
+        return bussinessSector;
+    }
+
+    public void setBussinessSector(String bussinessSector) {
+        this.bussinessSector = bussinessSector;
+    }
+
+    public String getBussinessName() {
+        return bussinessName;
+    }
+
+    public void setBussinessName(String bussinessName) {
+        this.bussinessName = bussinessName;
     }
 
     public String getUsername() {
@@ -47,11 +74,11 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    public UserAddress getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(UserAddress address) {
         this.address = address;
     }
 
@@ -61,6 +88,14 @@ public class UserDTO {
 
     public void setVAT(String VAT) {
         this.VAT = VAT;
+    }
+
+    public String getDOI() {
+        return DOI;
+    }
+
+    public void setDOI(String DOI) {
+        this.DOI = DOI;
     }
 
     public String getLogo() {
@@ -77,5 +112,37 @@ public class UserDTO {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getStripeCustomerId() {
+        return stripeCustomerId;
+    }
+
+    public void setStripeCustomerId(String stripeCustomerId) {
+        this.stripeCustomerId = stripeCustomerId;
+    }
+
+    public String getElorusCustomerId() {
+        return elorusCustomerId;
+    }
+
+    public void setElorusCustomerId(String elorusCustomerId) {
+        this.elorusCustomerId = elorusCustomerId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

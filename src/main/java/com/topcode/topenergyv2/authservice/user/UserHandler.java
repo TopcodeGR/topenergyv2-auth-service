@@ -5,7 +5,10 @@ import com.topcode.topenergyv2.authservice.utils.APIResponse;
 import com.topcode.topenergyv2.authservice.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.codec.multipart.FormFieldPart;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyExtractors;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -39,6 +42,16 @@ public class UserHandler {
                         .body(BodyInserters.fromValue(new APIResponse<List<UserDTO>>(p,true,"").getAsMap())));
     }
 
+    public Mono<ServerResponse> find(ServerRequest req){
+        System.out.println(req.queryParams());
+        Flux<User> users = userService.find(req.queryParams());
+
+        return  users.map(u-> ObjectMapperUtils.map(u,UserDTO.class)).collectList()
+                .flatMap(p->p.size() == 0 ? ServerResponse.status(404).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"No users found").getAsMap())) : ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromValue(new APIResponse<List<UserDTO>>(p,true,"").getAsMap())));
+    }
+
 
     public Mono<ServerResponse> findByUsername(ServerRequest req){
 
@@ -55,6 +68,7 @@ public class UserHandler {
                 .switchIfEmpty(ServerResponse.status(404).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"The user was not found").getAsMap())));
 
     }
+
 
     public Mono<ServerResponse> findById(ServerRequest req){
         String userId = req.pathVariable("userId");
@@ -82,6 +96,25 @@ public class UserHandler {
 
                 });
     }
+
+    public Mono<ServerResponse> updateUserLogo(ServerRequest req){
+        String userId = req.pathVariable("userId");
+
+
+        return req.body(BodyExtractors.toMultipartData()).flatMap(b->{
+            FilePart logo = (FilePart) b.toSingleValueMap().get("logo");
+            try {
+                return this.userService.updateUserLogo(logo,"users/"+ userId + "/logo",userId).flatMap(url->{
+                    return ServerResponse.status(200).body(BodyInserters.fromValue(new APIResponse<String>(url,true,"").getAsMap()));
+                }).switchIfEmpty(ServerResponse.status(404).body(BodyInserters.fromValue(new APIResponse<Void>(null,true,"There user was not found").getAsMap())));
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
+    }
+
 
 
 

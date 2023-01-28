@@ -1,0 +1,13 @@
+
+    server:
+      port: 5000
+    db-connection-string: ${DB_CONNECTION_STRING}
+    db-name: ${DB_NAME}
+    auth:
+      jwt-secret: ${AUTH_JTW_SECRET}
+    eureka: #tells about the Eureka server details and its refresh time
+      client:
+        defaultZone: http://localhost:8761/eureka/
+    spring:
+      application:
+        name: auth-service   #current service name to be used by the eureka server

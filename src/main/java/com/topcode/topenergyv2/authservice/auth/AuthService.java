@@ -39,7 +39,7 @@ public class AuthService {
     }
 
 
-    public Boolean validateJWTToken(String token){
+    public JWTTokenValidationData validateJWTToken(String token){
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("auth0")
@@ -50,9 +50,9 @@ public class AuthService {
         }
         catch(JWTVerificationException e){
             System.out.println(e.getMessage());
-            return false;
+            return new JWTTokenValidationData(false,e.getMessage());
         }
-        return true;
+        return new JWTTokenValidationData(true,"");
     }
 
     @Nullable
@@ -66,12 +66,14 @@ public class AuthService {
         try{
             DecodedJWT decodedJWT = verifier.verify(token);
             String userId = decodedJWT.getClaim("userId").toString();
+
             if(userId == null || userId.isEmpty()){
                 return null;
             }
             return userId;
         }
         catch(JWTVerificationException e){
+            System.out.println(e.toString());
             return null;
         }
     }

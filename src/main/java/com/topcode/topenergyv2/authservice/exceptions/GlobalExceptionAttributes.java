@@ -17,7 +17,9 @@ public class GlobalExceptionAttributes extends DefaultErrorAttributes {
                                                   ErrorAttributeOptions options) {
 
         Throwable error = super.getError(request);
-        System.out.println();
+        System.out.println(request.uri());
+        System.out.println(request.path());
+        System.out.println(error.toString());
         Map<String, Object> map =  new HashMap<>();//super.getErrorAttributes(request, options);
         map.put("message","Something went wrong");
         map.put("success", false);

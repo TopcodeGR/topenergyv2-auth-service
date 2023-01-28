@@ -82,10 +82,10 @@ public class AuthHandler {
         accessToken = accessToken.replaceAll("Bearer","").trim();
         String finalAccessToken = accessToken;
 
-        Boolean isAccessTokenValid = authService.validateJWTToken(finalAccessToken);
+        JWTTokenValidationData validationData = authService.validateJWTToken(finalAccessToken);
 
-        if(!isAccessTokenValid){
-            return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"Not authorized.").getAsMap()));
+        if(!validationData.isValid()){
+            return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false, validationData.getMessage()).getAsMap()));
         }
 
         return ServerResponse.status(200).body(BodyInserters.fromValue(new APIResponse<Void>(null,true,"").getAsMap()));
@@ -98,7 +98,7 @@ public class AuthHandler {
         String refreshToken = headers.firstHeader("refreshToken");
         String clientId = headers.firstHeader("clientId");
         String userId = authService.getUserIdFromToken(refreshToken);
-
+        System.out.println(userId);
         if(userId == null || userId.isBlank() ){
             return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"This user is not authorized.").getAsMap()));
         }
@@ -106,10 +106,10 @@ public class AuthHandler {
         if(refreshToken == null || refreshToken.isBlank()){
             return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"No refresh token was provided.").getAsMap()));
         }
-        Boolean isRefreshTokenValid = authService.validateJWTToken(refreshToken);
+        JWTTokenValidationData validationData = authService.validateJWTToken(refreshToken);
 
-        if(!isRefreshTokenValid){
-            return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false,"Not authorized.").getAsMap()));
+        if(!validationData.isValid()){
+            return ServerResponse.status(401).body(BodyInserters.fromValue(new APIResponse<Void>(null,false, validationData.getMessage()).getAsMap()));
         }
 
         userId = userId.replaceAll("^\"|\"$", "");
