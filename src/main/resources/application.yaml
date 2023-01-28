@@ -1,0 +1,15 @@
+server:
+  port: 5000
+db-connection-string: mongodb+srv://Topcode:tc2020@cluster0.rgxku.mongodb.net/topenergyv2?authSource=admin&replicaSet=atlas-11qyua-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
+db-name: topenergyv2
+auth:
+  jwt-secret: topenergyv2
+eureka:     #tells about the Eureka server details and its refresh time
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: auth-service   #current service name to be used by the eureka server

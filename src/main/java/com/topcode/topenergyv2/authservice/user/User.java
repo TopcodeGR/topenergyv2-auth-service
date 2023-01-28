@@ -14,11 +14,19 @@ public class User {
     private String _id;
     private String username;
     private String password;
-    private String name;
-    private String address;
+    private String firstName;
+    private String lastName;
+    private String bussinessSector;
+    private String bussinessName;
+    private UserAddress address;
     private String phone;
+    private String email;
     private String VAT;
+    private String DOI;
     private Number ceYear;
+    private String stripeCustomerId;
+
+    private String elorusCustomerId;
     private String logo;
     private Boolean active;
     private Map<String,UserAccessToken> accessTokens;
@@ -26,16 +34,29 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
 
-    public User(String username, String password, String name, String address, String phone, String VAT, Number ceYear, String logo, Boolean active) {
+
+
+    public User(String _id, String username, String password, String firstName, String lastName, String bussinessSector, String bussinessName, UserAddress address, String phone,String email,  String VAT, String DOI, Number ceYear, String stripeCustomerId, String elorusCustomerId, String logo, Boolean active) {
+        this._id = _id;
         this.username = username;
         this.password = password;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bussinessSector = bussinessSector;
+        this.bussinessName = bussinessName;
         this.address = address;
         this.phone = phone;
+        this.email = email;
         this.VAT = VAT;
+        this.DOI = DOI;
         this.ceYear = ceYear;
+        this.stripeCustomerId = stripeCustomerId;
+        this.elorusCustomerId = elorusCustomerId;
         this.logo = logo;
         this.active = active;
+    }
+
+    public User() {
     }
 
     public String get_id() {
@@ -62,19 +83,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
+    public UserAddress getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(UserAddress address) {
         this.address = address;
     }
 
@@ -155,5 +169,69 @@ public class User {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getStripeCustomerId() {
+        return stripeCustomerId;
+    }
+
+    public void setStripeCustomerId(String stripeCustomerId) {
+        this.stripeCustomerId = stripeCustomerId;
+    }
+
+    public String getElorusCustomerId() {
+        return elorusCustomerId;
+    }
+
+    public void setElorusCustomerId(String elorusCustomerId) {
+        this.elorusCustomerId = elorusCustomerId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getBussinessSector() {
+        return bussinessSector;
+    }
+
+    public void setBussinessSector(String bussinessSector) {
+        this.bussinessSector = bussinessSector;
+    }
+
+    public String getBussinessName() {
+        return bussinessName;
+    }
+
+    public void setBussinessName(String bussinessName) {
+        this.bussinessName = bussinessName;
+    }
+
+    public String getDOI() {
+        return DOI;
+    }
+
+    public void setDOI(String DOI) {
+        this.DOI = DOI;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
